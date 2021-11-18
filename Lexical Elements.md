@@ -89,6 +89,11 @@ wchar_t w0 = 'abcd'; // wchar_t, value '\x6364' (truncated)
 - 타입을 명시한 경우 타입 크기를 초과하면 앞(high-order) 부분이 잘린다(truncated).  
 그리고 컴파일러가 경고를 표시한다. (C4305, C4309)
 ##### 이스케이프 시퀀스
+이스케이프 문자라고도 하며 백슬래쉬(\)와 문자 하나로 구성된다.  
+문자 리터럴은 백슬래쉬(\), 작은따옴표('), newline을 제외한 모든 문자를 사용할 수 있다.  
+이들을 문자로 사용하려면 이스케이프 시퀀스로 명시한다.  
+반대로 `\b`처럼 이스케이프 시퀀스가 되면 b가 아닌 backspace가 된다.  
+이스케이프 시퀀스 [링크1][4], [링크2][5]
 ```
 char newline = '\n';
 char backslash = '\\';
@@ -103,13 +108,24 @@ char c4 = '\qrs';  // 's' (truncated. C4129, C4305, C4309)
 char c5 = 'x0050'; // 'p'
 char c6 = 'x0pqr'; // 'r' (truncated. C4305, C4309)
 ```
-- 문자 리터럴은 백슬래쉬(\), 작은따옴표('), newline을 제외한 모든 문자를 사용할 수 있다.  
-이들을 문자로 사용하려면 [이스케이프 시퀀스][4]로 명시한다.  
-반대로 `\b`처럼 이스케이프 시퀀스가 되면 b가 아닌 backspace가 된다.
-- 8진수 이스케이프 시퀀스는 3-digit 까지만 담을 수 있으며, 이를 넘으면 잘린다.  
-`\377` 보다 큰 8진수 이스케이프 시퀀스는 에러를 발생시킨다. (C2022: 'value-in-decimal': too big for character)
-- 16진수 숫자(digit)을 포함하지 않는 16진수 리터럴은 에러를 발생시킨다. (C2153: "hex literals must have at least one hex digit")
 
+- 8진수 표기: ASCII 형식을 따르며, 최대 3-digit을 담아 '\ooo'의 형태를 가진다. (앞에서 자릿수를 채우는 0은 생략 가능)
+  - 3개를 넘으면 뒤의 3개만 가지고 나머지 앞의 숫자들은 잘린다. (경고)
+  - 0-7가 아닌 숫자를 가지면 맨 뒤의 문자만 가지며 앞의 숫자들은 잘린다. (경고)
+  - `\377` 보다 크면 안된다. (에러 C2022: 'value-in-decimal': too big for character)  
+  8진수 0377은 10진수 255이다. 이것은 1바이트(8비트)가 모두 1인 값이다.  
+  따라서 범위는 10진수로 0-255이며, 이것은 unsigned char의 범위와 동일하다.  
+  ASCII는 총 128개지만, 8진수 이스케이프 문자는 총 256개다.
+- 16진수 표기: 유니코드를 나타내며, 최대 4개의 숫자를 담아 '\xhhhh'의 형태를 가진다.
+  - truncation은 8진수 표기와 동일하게 앞의 숫자를 버린다.
+  - 숫자(digit)를 적어도 한 개는 포함해야 한다. (에러 C2153: "hex literals must have at least one hex digit")
+##### 접두사 L
+다중문자에 접두어 L을 붙이면 truncation을 반대로 한다. (앞의 숫자를 가진다.)  
+위에서 봤듯이 L은 wchar_t 타입을 명시하는 것이다.  
+wchar은 wide-character를 줄인 것이며 이는 16비트(2바이트) 크기를 갖는다. L은 아마도 letter(글자)를 의미할 것이다.
+```
+wchar_t w1 = L'\100'; // L'@' (이스케이프 시퀀스)
+```
 #### 문자열(string)
 문자열 리터럴은 큰따옴표(")로 감싼다.
 ```
@@ -180,4 +196,5 @@ auto S5 = R"(Hello \ world)"s; // std::string from a raw const char*
 [2]: https://docs.microsoft.com/en-us/cpp/cpp/keywords-cpp?view=msvc-170
 [3]: https://docs.microsoft.com/en-us/cpp/standard-library/is-integral-class?view=msvc-170
 [4]: https://docs.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp?view=msvc-170#bkmk_Escape
+[5]: https://docs.microsoft.com/en-us/cpp/c-language/escape-sequences?view=msvc-170
 []: https://docs.microsoft.com/en-us/cpp/cpp/character-sets?view=msvc-170
