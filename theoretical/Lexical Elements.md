@@ -54,12 +54,12 @@ if (num < 100)
 포터블 코드에서는 integral 타입의 `0`이나 `NULL` 같은 매크로 대신 `nullptr`를 써야 한다.
 > 포터블 코드(portable code): 특정 플랫폼에 밀착 결합되지 않은(not tightly coupled) 코드.
 #### puctuator
-puctuation marks는 문장 부호를 말하며, puctuator는 문장 부호 역할을 하는 요소를 말한다.  
-즉, C++ 어휘 요소에서의 문장 부로라고 할 수 있다.  
+C++ 어휘 요소에서의 문장 부호를 puctuator라고 부른다.  
 `! % ^ & * ( ) - + = { } | ~ [ ] \ ; ' : " < > ? , . #`는 문장 부호로 간주된다.
+> 문장 부호의 영단어는 puctuation 혹은 puctuation marks다.
 
 ## 여백(white space)
-토큰은 주로 여백으로 구분된다.  
+토큰을 구분해주는 요소다.  
 빈칸(blank), 수평 및 수직 탭(tab), new line, form feed, 주석 등이 있다.
 #### new line
 화면에서 다음 행으로 줄을 바꾼다.  
