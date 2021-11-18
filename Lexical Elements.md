@@ -106,24 +106,38 @@ char c4 = '\qrs';  // 's' (truncated. C4129, C4305, C4309)
 
 char c5 = 'x0050'; // 'p'
 char c6 = 'x0pqr'; // 'r' (truncated. C4305, C4309)
+
+char c7 = '\u0041'; // UCN 'A'
+char c8 = '\U00000041'; // UCN 'A'
 ```
 ###### 8진수 표기
 - ASCII 형식을 따르며, 최대 3-digit을 담아 '\ooo'의 형태를 가진다. (앞에서 자릿수를 채우는 0은 생략 가능)
-  - 3개를 넘으면 뒤의 3개만 가지고 나머지 앞의 숫자들은 잘린다. (경고)
-  - 0-7가 아닌 숫자를 가지면 맨 뒤의 문자만 가지며 앞의 숫자들은 잘린다. (경고)
-  - `\377` 보다 크면 안된다. (에러 C2022: 'value-in-decimal': too big for character)  
-  8진수 0377은 10진수 255이다. 이것은 1바이트(8비트)가 모두 1인 값이다.  
-  따라서 범위는 10진수로 0-255이며, 이것은 unsigned char의 범위와 동일하다.  
-  ASCII는 총 128개지만, 8진수 이스케이프 문자는 총 256개다.
-- 16진수 표기: 유니코드를 나타내며, 최대 4개의 숫자를 담아 '\xhhhh'의 형태를 가진다.
-  - truncation은 8진수 표기와 동일하게 앞의 숫자를 버린다.
-  - 숫자(digit)를 적어도 한 개는 포함해야 한다. (에러 C2153: "hex literals must have at least one hex digit")
+- 3개를 넘으면 뒤의 3개만 가지고 나머지 앞의 숫자들은 잘린다. (경고)
+- 0-7가 아닌 숫자를 가지면 맨 뒤의 문자만 가지며 앞의 숫자들은 잘린다. (경고)
+- `\377` 보다 크면 안된다. (에러 C2022: 'value-in-decimal': too big for character)  
+8진수 0377은 10진수 255이다. 이것은 1바이트(8비트)가 모두 1인 값이다.  
+따라서 범위는 10진수로 0-255이며, 이것은 unsigned char의 범위와 동일하다.  
+ASCII는 총 128개지만, 8진수 이스케이프 문자는 총 256개다.
+###### 16진수 표기
+- 유니코드를 나타내며, 최대 4개의 숫자를 담아 '\xhhhh'의 형태를 가진다.
+- truncation은 8진수 표기와 동일하게 앞의 숫자를 버린다.
+- 숫자(digit)를 적어도 한 개는 포함해야 한다. (에러 C2153: "hex literals must have at least one hex digit")
+###### Universal character
+- 작은따옴표 내부에서 다중문자에 접두사 `\u`를 붙이고 뒤에 4개의 숫자를 붙인다.
+- 작은따옴표 내부에서 다중문자에 접두사 `\U`를 붙이고 뒤에 8개의 숫자를 붙인다.
 ##### 접두사 L
 다중문자에 접두어 L을 붙이면 truncation을 반대로 한다. (앞의 숫자를 가진다.)  
 위에서 봤듯이 L은 wchar_t 타입을 명시하는 것이다.  
 wchar은 wide-character를 줄인 것이며 이는 16비트(2바이트) 크기를 갖는다. (L은 아마도 letter(글자)를 의미)
 ```
-wchar_t w1 = L'\100'; // L'@' (이스케이프 시퀀스)
+wchar_t w1 = L'\100'; // L'@'
+wchar_t w2 = L'\1000'; // L'@' (truncated. C4066)
+wchar_t w3 = L'\009'; // L'\0' (truncated. C4066)
+wchar_t w4 = L'\089'; // L'\0' (truncated. C4066)
+wchar_t w5 = L'\qrs'; // L'q' (truncated. C4066, C4129)
+
+wchar_t w6 = L'\x0050'; // L'P'
+wchar_t w7 = L'\x0pqr'; // L'\0' (truncated. C4066)
 ```
 #### 문자열(string)
 문자열 리터럴은 큰따옴표(")로 감싼다.
@@ -138,6 +152,7 @@ auto s4 = U"hello";  // const char32_t*
 ###### raw string
 이스케이프 문자를 사용하지 않고 모든 타입의 문자열 리터럴을 표현할 수 있게 만든다.  
 즉, C++에서는 문자열에 unescaped된 \와 "를 포함할 수 있다.  
+raw string이 아닌 원래 문자열은 native string 혹은 non-raw string이라고도 한다.
 ```
 auto R0 = R"(Hello \ world)"   // Hello \ world
 auto R1 = R"("Hello \ world")" // "Hello \ world"
