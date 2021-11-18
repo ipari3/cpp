@@ -122,7 +122,7 @@ char c6 = 'x0pqr'; // 'r' (truncated. C4305, C4309)
 ##### 접두사 L
 다중문자에 접두어 L을 붙이면 truncation을 반대로 한다. (앞의 숫자를 가진다.)  
 위에서 봤듯이 L은 wchar_t 타입을 명시하는 것이다.  
-wchar은 wide-character를 줄인 것이며 이는 16비트(2바이트) 크기를 갖는다. L은 아마도 letter(글자)를 의미할 것이다.
+wchar은 wide-character를 줄인 것이며 이는 16비트(2바이트) 크기를 갖는다. (L은 아마도 letter(글자)를 의미)
 ```
 wchar_t w1 = L'\100'; // L'@' (이스케이프 시퀀스)
 ```
