@@ -1,5 +1,11 @@
-#### 문자(character)
-문자 리터럴은 작은따옴표(')로 감싼다.
+# 리터럴
+문자 및 문자열 리터럴은 뉴메릭 리터럴과 다른 점이 많다.
+- 대소문자를 구분.
+- 접두사(prefix)를 사용하여 타입을 명시.
+- 크기나 범위 외에도, 인코딩 방식에 대한 특징이 존재.
+문자 리터럴은 작은따옴표(')로 감싸고, 문자열 리터럴은 큰따옴표(")로 감싼다.  
+또한 타입이 비슷하지만 다르다.
+## 문자(character)
 ```
 auto c0 = 'A';   // char
 auto c1 = u8'A'; // char
@@ -7,11 +13,11 @@ auto c2 = L'A';  // wchar_t
 auto c3 = u'A';  // char16_t
 auto c4 = U'A';  // char32_t
 ```
-- numeric과 다르게 접두사(prefix)를 사용하여 타입을 명시하며, 대소문자를 구분한다.
-- char 타입(접두가사 없거나 접두사 u8)은 UTF-8 유니코드 인코딩을 사용한다. (가변 길이, 단일 인코딩)
-- wchar_t 타입(접두사 L)은 wide 문자인 UCS-2나 UTF-16 인코딩을 사용한다.
-- char16_t(접두사 u)와 char32_t(접두사 U) 타입은 각각 UTF-16, UTF-32 인코딩을 사용한다.
-##### 다중문자(multicharacter)
+- char / 접두사가 없거나 u8 / UTF-8 유니코드 인코딩 (가변 길이, 단일 인코딩)
+- wchar_t  / 접두사 L / UCS-2나 UTF-16 인코딩 (둘 다 wide-character)
+- char16_t / 접두사 u / UTF-16 인코딩
+- char32_t / 접두사 U / UTF-32 인코딩
+#### 다중문자(multicharacter)
 자바와 달리 다중문자가 가능하다.
 ```
 auto m0 = 'abcd'; // int, value 0x61626364
@@ -44,7 +50,7 @@ char c7 = '\u0041'; // UCN 'A'
 char c8 = '\U00000041'; // UCN 'A'
 ```
 ###### 8진수 표기
-- ASCII 형식을 따르며, 최대 3-digit을 담아 '\ooo'의 형태를 가진다. (앞에서 자릿수를 채우는 0은 생략 가능)
+- ASCII 코드를 나타내며, 최대 3-digit을 담아 '\ooo'의 형태를 가진다. (앞에서 자릿수를 채우는 0은 생략 가능)
 - 3개를 넘으면 뒤의 3개만 가지고 나머지 앞의 숫자들은 잘린다. (경고)
 - 0-7가 아닌 숫자를 가지면 맨 뒤의 문자만 가지며 앞의 숫자들은 잘린다. (경고)
 - `\377` 보다 크면 안된다. (에러 C2022: 'value-in-decimal': too big for character)  
@@ -52,12 +58,17 @@ char c8 = '\U00000041'; // UCN 'A'
 따라서 범위는 10진수로 0-255이며, 이것은 unsigned char의 범위와 동일하다.  
 ASCII는 총 128개지만, 8진수 이스케이프 문자는 총 256개다.
 ###### 16진수 표기
-- 유니코드를 나타내며, 최대 4개의 숫자를 담아 '\xhhhh'의 형태를 가진다.
+- 유니코드를 나타내며, 4개의 16진수 숫자를 담아 '\xhhhh'의 형태를 가진다.  
+2개만 담으면 ASCII 코드를 나타내며, 대소문자는 구분하지 않는다.
 - truncation은 8진수 표기와 동일하게 앞의 숫자를 버린다.
-- 숫자(digit)를 적어도 한 개는 포함해야 한다. (에러 C2153: "hex literals must have at least one hex digit")
-###### Universal character
+- 16진수 숫자를 적어도 한 개는 포함해야 한다. (에러 C2153: "hex literals must have at least one hex digit")  
+(8진수 표기에서는 truncation이 일어나고 경고만 띄운다.)
+- 16진수 이스케이프 시퀀스의 범위는 0000-FFFF
+###### UCL(Universal Character Name)
 - 작은따옴표 내부에서 다중문자에 접두사 `\u`를 붙이고 뒤에 4개의 숫자를 붙인다.
 - 작은따옴표 내부에서 다중문자에 접두사 `\U`를 붙이고 뒤에 8개의 숫자를 붙인다.
+###### Surrogate Pair(대리쌍)
+UCL은 D800-DFFF 
 ##### 접두사 L
 다중문자에 접두어 L을 붙이면 truncation을 반대로 한다. (앞의 숫자를 가진다.)  
 위에서 봤듯이 L은 wchar_t 타입을 명시하는 것이다.  
@@ -73,7 +84,6 @@ wchar_t w6 = L'\x0050'; // L'P'
 wchar_t w7 = L'\x0pqr'; // L'\0' (truncated. C4066)
 ```
 #### 문자열(string)
-문자열 리터럴은 큰따옴표(")로 감싼다.
 ```
 auto s0 = "hello";   // const char*
 auto s1 = u8"hello"; // const char*(before C++20), const char8_t*(in C++20)
