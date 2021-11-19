@@ -2,22 +2,24 @@
 built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, 어떠한 헤더 파일에도 정의되어 있지 않다.  
 동의어(synonym)인 타입들은 컴파일러에게 동일한 타입으로 취급된다.
 ## 빌트인 타입 크기 비교
-- 1바이트: `__int8`, &nbsp; `char8_t`, &nbsp; `char`, `bool`, `unsigned char`, `signed char`, 
+- 1바이트: `__int8`, &nbsp; `char8_t`, &nbsp; `char`, `bool`, `unsigned char`, `signed char`
 - 2바이트: `__int16`, `char16_t`, `short`, `wchar_t`, `__wchar_t`, `unsigned short`
 - 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`, `unsigned int`, `unsigned long`
 - 8바이트: `__int64`, `long long`, `double`, `long double`, `unsigned long long`  
 [데이터 타입의 범위 외부 링크][1]  
 > 타입의 크기는 구현 방식에 따라 다르며, 보통 다음의 크기 비교가 성립한다.  
-> 1바이트 = `char` <= `short` <= `int` <= `long` <= `long long`
-> C++에서는 `int`와 `long`이 4바이트로 같으며, 위의 크기 비교에 부합한다.
-
+> 1바이트 = `char` <= `short` <= `int` <= `long` <= `long long`  
+> C++에서는 `int`와 `long`이 4바이트로 같으며, 위의 크기 비교에 부합한다.  
+> 또한 `double`과 `long double`도 8바이트로 같다.
 #### 동의어
-- `__int8`과 `char`
+기본적으로 언더스코어 두 개로 시작하는 타입은 다른 타입의 동의어다.
+- `__int8`과 &nbsp; `char`
 - `__int16`과 `short`
 - `__int32`와 `int`
 - `__int64`와 `long long`
+
 ## 정수(integer) 타입
-정수 타입은 `int`에 modifier 키워드를 조합하여 사용한다.
+`int`가 기본 정수 타입이며 modifier 키워드를 추가로 명시할 수 있다.
 #### sign modifier 키워드
 - `signed`: 양수와 음수 표현 (default)
 - `unsigned`: 음수가 아닌 값만 표현
@@ -33,11 +35,8 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - int, signed, signed int
 - unsigned long long, unsigned long long int
 
-
-`int` 타입은 기본 정수 타입이며, 구현에 따른 범위 내의 모든 수를 표현한다.  
-
 ## 부동소수점(floating-point) 타입
-C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용하며, 3개의 빌트인 타입이 있다.
+C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용하며, 3개의 built-in 타입이 있다.
 - float
 - double
 - long double
