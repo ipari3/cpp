@@ -1,4 +1,4 @@
-# 빌트인 타입
+# 빌트인(built-in) 타입
 빌트인 타입은 컴파일러에 들어가 있는(built into) 타입으로, 어떠한 헤더 파일에도 정의되어 있지 않다.  
 대부분의 빌트인 타입은 컴파일러에게 별개의(distict) 타입으로 취급되지만,  
 어떤 것들은 동의어로써, 동일한 타입으로 취급되는 것도 있다.  
@@ -10,7 +10,7 @@
 또한 데이터를 담는 빌트인 타입은 native 타입 혹은 native 데이터 타입이라고도 한다.  
 문자열은 빌트인이나 native 타입이 아니며, specific 데이터 타입이라고 한다.
 
-## 문자 타입
+## 문자(character) 타입
 #### char
 C++ 컴파일러는 `char`, `signed char`, `unsigned char` 타입을 다른 타입으로 다룬다.
 - `char` 타입은 기본적으로 `signed char` 처럼 `int`로 진급된다(promoted).
@@ -35,10 +35,41 @@ UTF-16 문자 표현을 위해 사용된다.
 UTF-32 문자 표현을 위해 사용된다.  
 이는 어떠한 UTF-32 코드 유닛이라도 표현할 수 있을 만큼 커야 한다.  
 역시 컴파일러에게 별개의 타입으로 취급된다.
-## 부동소수점 타입
+
+## 정수(integer) 타입
+`int` 타입은 기본 정수 타입이며, 구현에 따른 범위 내의 모든 수를 표현한다.  
+- `signed` modifier 키워드가 있으면 양수와 음수를 표현할 수 있으며, default로 signed이다.
+- `unsigned` modifier 키워드가 명시되면 음수가 아닌 값만 표현할 수 있다.
+크기 modifier는 세 가지가 있다.
+- short: 16비트보다 작아야 한다.
+- long: 32비트보다 작아야 한다.
+- long long: 64비트보다 작아야 한다.
+`int` 키워드는 다른 modifier가 있을 때 생략될 수 있다.  
+또한 `short unsigned`나 `unsigned int short` 처럼 순서는 상관이 없다.  
+다음은 컴파일러에게 동의어인 것들의 예이다.
+- short, short int, signed short, signed short int
+- int, signed, signed int
+- unsigned long long, unsigned long long int
+또한 크기를 명시하는 형태도 있다.
+- `__int8`: `char`과 동의어다.
+- `__int16`: `short`과 동의어다.
+- `__int32`: `int`와 동의어다.
+- `__int64`: `long long`과 동의어다.
+
+#### 빌트인 타입 크기 비교
+- 1바이트: `bool`, `char`, `char8_t`, `unsigned char`, `signed char`, `__int8`
+- 2바이트: `char16_t`, `__int16`, `short`, `unsigned short`, `wchar_t`, `__wchar_t`
+- 4바이트: `char32_t`, `float`, `__int32`, `int`, `unsigned int`, `long`, `unsigned long`
+- 8바이트: `double`, `__int64`, `long double`, `long long`, `unsigned long long`
+[데이터 타입의 범위 외부 링크][] 
+
+## 부동소수점(floating-point) 타입
+C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용하며, 3개의 빌트인 타입이 있다.
 - float
 - double
 - long double
+`double`과 `long double`의 표현은 동일하지만, 컴파일러에게는 별개의 타입으로 취급된다.  
+[부동소수점 표현 외부 링크][5]
 
 ## 기타 타입
 #### bool
@@ -69,7 +100,9 @@ UTF-32 문자 표현을 위해 사용된다.
 [2]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-conformance?view=msvc-170
 [3]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-wchar-t-wchar-t-is-native-type?view=msvc-170
 [4]: https://docs.microsoft.com/en-us/cpp/build/reference/std-specify-language-standard-version?view=msvc-170
+[5]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
 
+[]: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170
 
 [1]: 표현문
 [2]: 컴마 연산자
