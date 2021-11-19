@@ -5,7 +5,7 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - 1바이트: `__int8`,  `char8_t`,  `char`, `bool`,                       `unsigned char`, `signed char`, 
 - 2바이트: `__int16`, `char16_t`, `short`, `wchar_t`, `__wchar_t`,      `unsigned short`
 - 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`,               `unsigned int`, `unsigned long`
-- 8바이트: `__int64`,             `long long`, `double`, `long double`, `unsigned long long`
+- 8바이트: `__int64`,             `long long`, `double`, `long double`, `unsigned long long`  
 [데이터 타입의 범위 외부 링크][1]  
   
 > 타입의 크기는 구현 방식에 따라 다르다.  
