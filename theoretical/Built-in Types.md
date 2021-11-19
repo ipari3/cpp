@@ -2,9 +2,9 @@
 built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, 어떠한 헤더 파일에도 정의되어 있지 않다.  
 동의어(synonym)인 타입들은 컴파일러에게 동일한 타입으로 취급된다.
 ## 빌트인 타입 크기 비교
-- 1바이트: `__int8`, &nbsp; `char8_t`, &nbsp; `char`, `bool`,                       `unsigned char`, `signed char`, 
-- 2바이트: `__int16`, `char16_t`, `short`, `wchar_t`, `__wchar_t`,      `unsigned short`
-- 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`,               `unsigned int`, `unsigned long`
+- 1바이트: `__int8`, &nbsp; `char8_t`, &nbsp; `char`, `bool`, `unsigned char`, `signed char`, 
+- 2바이트: `__int16`, `char16_t`, `short`, `wchar_t`, `__wchar_t`, `unsigned short`
+- 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`, `unsigned int`, `unsigned long`
 - 8바이트: `__int64`, `long long`, `double`, `long double`, `unsigned long long`  
 [데이터 타입의 범위 외부 링크][1]  
   
