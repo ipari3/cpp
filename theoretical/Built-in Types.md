@@ -7,11 +7,10 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`, `unsigned int`, `unsigned long`
 - 8바이트: `__int64`, `long long`, `double`, `long double`, `unsigned long long`  
 [데이터 타입의 범위 외부 링크][1]  
-  
-> 타입의 크기는 구현 방식에 따라 다르다.  
-> C++에서는 `int`와 `long` 모두 4바이트다.  
-> 다만 일반적으로 다음의 크기 비교가 성립한다.  
+> 타입의 크기는 구현 방식에 따라 다르며, 보통 다음의 크기 비교가 성립한다.  
 > 1바이트 = `char` <= `short` <= `int` <= `long` <= `long long`
+> C++에서는 `int`와 `long`이 4바이트로 같으며, 위의 크기 비교에 부합한다.
+
 #### 동의어
 - `__int8`과 `char`
 - `__int16`과 `short`
