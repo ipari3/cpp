@@ -51,8 +51,7 @@ if (num < 100)
 `true`와 `false`가 있다.
 ##### 포인터 리터럴
 포인터 리터럴은 [`nullptr`][6]을 말하며, 이는 0으로 초기화된(zero-initialized) 포인터를 명시한다.  
-포터블 코드에서는 integral 타입의 `0`이나 `NULL` 같은 매크로 대신 `nullptr`를 써야 한다.
-> 포터블 코드(portable code): 특정 플랫폼에 밀착 결합되지 않은(not tightly coupled) 코드.
+널 포인터 상수로 `NULL`이나 `0` 대신 `nullptr`을 사용하는 것이 좋다.
 #### puctuator
 C++ 어휘 요소에서의 문장 부호를 puctuator라고 부른다.  
 `! % ^ & * ( ) - + = { } | ~ [ ] \ ; ' : " < > ? , . #`는 문장 부호로 간주된다.
