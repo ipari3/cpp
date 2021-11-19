@@ -36,12 +36,10 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - unsigned long long, unsigned long long int
 
 ## 부동소수점(floating-point) 타입
-C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용하며, 3개의 built-in 타입이 있다.
-- float
-- double
-- long double
+C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용한다.  
+3개의 built-in 타입이 있다: `float`, `double`, `long double`  
 `double`과 `long double`의 표현은 동일하지만, 컴파일러에게는 별개의 타입으로 취급된다.  
-[부동소수점 표현 외부 링크][5]
+[부동소수점 표현 외부 링크][2]
 
 ## 문자(character) 타입
 #### char
@@ -104,7 +102,7 @@ b++; // 에러
 
 
 [1]: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170
-
+[2]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
 
 
 
@@ -112,7 +110,7 @@ b++; // 에러
 [2]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-conformance?view=msvc-170
 [3]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-wchar-t-wchar-t-is-native-type?view=msvc-170
 [4]: https://docs.microsoft.com/en-us/cpp/build/reference/std-specify-language-standard-version?view=msvc-170
-[5]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
+
 
 
 
