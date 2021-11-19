@@ -3,6 +3,7 @@
 
 #### C++/CLI의 nullptr
 `nullptr` 키워드는 C++/CLI에도 정의되어 있지만 ISO 표준 C++ 키워드와는 다르며 교체가능하지 않다.
-> C++/CLI는 C++ 코드를 C#에서 사용할 수 있는 코드로 만들어준다.
-> - ISO 표준 C++로 작성한 C++코드는 native 코드 혹은 unmanaged 코드라고 한다.
-> - C++/CLI로 native 코드를 wrapping한 것을 managed 코드라고 한다. 
+[/clr][] 컴파일러 옵션을 사용하는 경우, 컴파일러가 네이티브 C++의 `nullptr`로 해석하게 하려면 `__nullptr`을 사용해야 한다.
+[]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#clr
+[C++/CLI와 C++/CX의 nullptr 외부 링크][]
+[]: https://docs.microsoft.com/en-us/cpp/extensions/nullptr-cpp-component-extensions?view=msvc-170
