@@ -24,6 +24,13 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 
 ([더 자세한 설명 외부 링크][7])
 
+## /Za
+**Disable Language Extensions**  
+- ANSI C89/ISO C90과 호환되지 않는 C에 대한 MS extensions를 disable한다.
+#### /Ze
+- MS extensions를 enable한다.  
+dafulat로 enable이기 대문에 이 옵션은 deprecated되었다.
+
 ## /Zc
 **Conformance(부합)**
 - 컴파일러가 standard-confirming(표준에 부합) 혹은 Microsoft-specific(MS 특유)하게 행동하도록 한다.
@@ -35,7 +42,7 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 #### /permissive-
 **Standards conformance**
 - 컴파일러에 standard conformance 모드를 명시한다.
-- permissive(관대한) 뒤에 minus를 붙인 것으로, 관대한 행동을 억제(disable)하는 것이다.
+- permissive(관대한) 뒤에 minus를 붙인 것으로, 관대한 행동을 disable하는 것이다.
 
 ([더 자세한 설명 외부 링크][8])
 #### /Zc:wchar_t
