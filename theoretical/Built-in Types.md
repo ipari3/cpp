@@ -45,32 +45,39 @@ C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 
 ([부동소수점 표현 외부 링크][2])
 
 ## 문자(character) 타입
+built-in 타입으로 `char`, `wchar_t`, `char8_t`, `char16_t`, `char32_t`가 있다.  
+- `char`과 `char8_t` 타입의 문자열은 'narrow string'이라고 한다.
+- `wchar_t`, `char16_t`, `char32_t` 타입의 문자열은 `wide string`이라고 한다.  
+일반적으로 wide string은 `wchar_t` 타입의 스트링을 말한다.
 #### char
-C++ 컴파일러는 1바이트 타입들인 `char`, `signed char`, `unsigned char`을 별개의 타입으로 다룬다.
-- `char` 타입은 기본적으로 `signed char` 처럼 `int`로 진급된다(promoted).
-- [/J 컴파일 옵션][3]이면, `unsigned char` 처럼 부호 확장이 없는 `int`로 진급된다.
+- 1바이트(8비트)
+- ASCII 코드나 multi-byte 문자(Shift-JIS나 UTF-8 인코딩된 유니코드)의 개별 바이트를 담을 수 있다.
+- `signed char`이나 `unsigned char`와는 별개의 타입이다.
+  - `char` 타입은 기본적으로 `signed char` 처럼 `int`로 진급된다(promoted).
+  - [/J 컴파일 옵션][3]이면, `unsigned char` 처럼 [부호 확장][4]이 없는 `int`로 진급된다.  
+  `unsigned char`은 built-in 타입이 아니며, 바이트를 표현하는데 종종 사용된다.
 #### wchar_t
-wchar_t는 wide-character 타입을 의미한다.   
-마이크로소프트의 `wchar_t`는 2바이트 unsigned 값을 표현한다.
-- default로 built-in 타입 (혹은 네이티브 타입)이다.  
-Microsoft-specific 네이티브 타입인 `__wchar_t`와 동의어다.
-- 컴파일러 옵션을 [`/Zc:wchar_t-`][4]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
-이 경우, `wchar_t`가 built-in 타입이 아니므로 권장되지 않는다.
+- wchar_t는 wide-character 타입을 의미한다.
+- 2바이트(16비트)이며, unsigned 표현에 사용한다.
+- UTF-16LE로 인코딩된 유니코드를 담을 수 있다. (이것은 윈도우 OS의 네이티브 문자 타입이다.)
+- default로는 built-in 타입(혹은 네이티브 타입)이다.  
+  - 이 경우, `__wchar_t`와 동의어다. (`__wchar_t`는 Microsoft-specific 네이티브 타입이다.)
+  - 컴파일러 옵션을 [`/Zc:wchar_t-`][5]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
+  이 경우, `wchar_t`가 built-in 타입이 아니므로 권장되지 않는다.
 - 리터럴에 `L` 접두사를 붙여 wide-character 타입으로 명시할 수 있다.
-#### char8_t
-UTF-8 문자 표현을 위해 사용된다.
-- C++20부터 생겼기 때문에 [`/std:c++20`][4]이나 `/std:c++latest` 같은 그 이후의 컴파일러 옵션을 사용해야 한다.
-- `unsigned char`과 동일한 표현을 갖지만, 컴파일러에게는 별개의 타입으로 취급된다.
-#### char16_t
-UTF-16 문자 표현을 위해 사용된다.  
-이는 어떠한 UTF-16 코드 유닛이라도 표현할 수 있을 만큼 커야 한다.  
-역시 컴파일러에게 별개의 타입으로 취급된다.
-#### char32_t
-UTF-32 문자 표현을 위해 사용된다.  
-이는 어떠한 UTF-32 코드 유닛이라도 표현할 수 있을 만큼 커야 한다.  
-역시 컴파일러에게 별개의 타입으로 취급된다.
-
-
+#### char8_t, char16_t, char32_t
+- char8_t: UTF-8 문자 표현. UTF-8로 인코딩된 유니코드를 저장할 수 있다.
+  - `unsigned char`과 표현은 같지만 별개의 타입이다.
+  - C++20부터 생겼기 때문에 `/std:c++20`이나 `/std:c++latest` 같은 그 이후의 컴파일러 옵션을 사용해야 한다.
+- char16_t: UTF-16 문자 표현. 모든 UTF-16 코드 유닛 표현 가능.
+- char32_t: UTF-32 문자 표현. 모든 UTF-32 코드 유닛 표현 가능.
+> C++ 표준 라이브러리의 `basic_string` 타입은 narrow와 wide 문자열 모두에 특화되어 있다.
+> - `std::string`: `char` 타입 문자들
+> - `std::wstring`: `wchar_t` 타입의 문자들
+> - `std::u8string`: `char8_t` 타입의 문자들
+> - `std::u16string`: `char16_t` 타입의 문자들
+> - `std::u32string`: `char32_t` 타입의 문자들
+> - 기타 `std::stringstream`과 `std::cout` 타입
 
 ## 기타 타입
 #### bool
@@ -107,7 +114,8 @@ b++; // 에러
 [1]: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170
 [2]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
 [3]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#j
-[4]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
+[4]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
+[5]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
 
 
 
