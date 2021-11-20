@@ -9,9 +9,15 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 [카테고리 별 목록][1], [알파벳순 목록][2]
 
 #### /clr
+**Common Language Runtime Option**  
 clr은 Common Language Runtime을 의미한다. (닷넷 프레임워크의 CLR)  
 CLR과 C++/CLI 컴파일을 허용한다.  
 managed 코드에 이용하는 옵션이다.
+
+#### /J
+**Default char Type Is unsigned**  
+default `char` 타입을 `signed char`에서 `unsigned char`로 바꾼다.
+
 
 [1]: https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-by-category?view=msvc-170
 [2]: https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-alphabetically?view=msvc-170
