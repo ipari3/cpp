@@ -5,8 +5,9 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - 1바이트: `__int8`, &nbsp; `char8_t`, &nbsp; `char`, `bool`, `unsigned char`, `signed char`
 - 2바이트: `__int16`, `char16_t`, `short`, `wchar_t`, `__wchar_t`, `unsigned short`
 - 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`, `unsigned int`, `unsigned long`
-- 8바이트: `__int64`, `long long`, `double`, `long double`, `unsigned long long`  
-[데이터 타입의 범위 외부 링크][1]  
+- 8바이트: `__int64`, `long long`, `double`, `long double`, `unsigned long long`
+([데이터 타입의 범위 외부 링크][1])
+
 > 타입의 크기는 구현 방식에 따라 다르며, 보통 다음의 크기 비교가 성립한다.  
 > 1바이트 = `char` <= `short` <= `int` <= `long` <= `long long`  
 > C++에서는 `int`와 `long`이 4바이트로 같으며, 위의 크기 비교에 부합한다.  
@@ -24,16 +25,17 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - `signed`: 양수와 음수 표현 (default)
 - `unsigned`: 음수가 아닌 값만 표현
 #### size modifier 키워드
-- short: 16비트(2바이트) 이하
-- long: 32비트(4바이트) 이하
-- long long: 64비트(8바이트) 이하
+- `short`: 16비트(2바이트) 이하
+- `long`: 32비트(4바이트) 이하
+- `long long`: 64비트(8바이트) 이하
+C++에서 `long`의 표현 및 크기는 `int`와 동일하지만, 컴파일러에게 별개의 타입으로 취급된다.
 #### int 키워드와 modifier
 `int` 키워드는 다른 modifier가 있을 때 생략될 수 있으며, modifier의 순서는 상관없다.  
 `short unsigned`와 `unsigned int short`는 동의어다.  
 ##### 동의어 예시들
-- short, short int, signed short, signed short int
-- int, signed, signed int
-- unsigned long long, unsigned long long int
+- `short`, `short int`, `signed short`, `signed short int`
+- `int`, `signed`, `signed int`
+- `unsigned long long`, `unsigned long long int`
 
 ## 부동소수점(floating-point) 타입
 C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용한다.  
