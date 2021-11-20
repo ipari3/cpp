@@ -36,5 +36,12 @@ LL 대신 i64 접미사(suffix)를 사용할 수 있지만 권장되지 않는�
 18.46l // long double 타입 (l이나 L을 붙인다.)
 ```
 
+#### 제한
+integer와 floating-point 타입의 제한값들이 상수로 정의되어 있다.
+- integer: \<climits\> ([목록 외부 링크][2])
+- floating-point: \<float.h\> ([목록 외부 링크][3])
 
 [1]: https://docs.microsoft.com/en-us/cpp/standard-library/is-integral-class?view=msvc-170
+
+[2]: https://docs.microsoft.com/en-us/cpp/cpp/integer-limits?view=msvc-170
+[3]: https://docs.microsoft.com/en-us/cpp/cpp/floating-limits?view=msvc-170
