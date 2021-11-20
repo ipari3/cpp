@@ -6,6 +6,7 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 - 2바이트: `__int16`, `char16_t`, `short`, `wchar_t`, `__wchar_t`, `unsigned short`
 - 4바이트: `__int32`, `char32_t`, `int`, `long`, `float`, `unsigned int`, `unsigned long`
 - 8바이트: `__int64`, `long long`, `double`, `long double`, `unsigned long long`
+
 ([데이터 타입의 범위 외부 링크][1])
 
 > 타입의 크기는 구현 방식에 따라 다르며, 보통 다음의 크기 비교가 성립한다.  
@@ -41,21 +42,21 @@ C++에서 `long`의 표현 및 크기는 `int`와 동일하지만, 컴파일러�
 C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용한다.  
 3개의 built-in 타입이 있다: `float`, `double`, `long double`  
 `double`과 `long double`의 표현은 동일하지만, 컴파일러에게는 별개의 타입으로 취급된다.  
-[부동소수점 표현 외부 링크][2]
+([부동소수점 표현 외부 링크][2])
 
 ## 문자(character) 타입
 #### char
-C++ 컴파일러는 `char`, `signed char`, `unsigned char` 타입을 다른 타입으로 다룬다.
+C++ 컴파일러는 1바이트 타입들인 `char`, `signed char`, `unsigned char`을 별개의 타입으로 다룬다.
 - `char` 타입은 기본적으로 `signed char` 처럼 `int`로 진급된다(promoted).
-- [/J 컴파일 옵션][1]이면, `unsigned char` 처럼 부호 확장이 없는 `int`로 진급된다.
+- [/J 컴파일 옵션][3]이면, `unsigned char` 처럼 부호 확장이 없는 `int`로 진급된다.
 #### wchar_t
-`wchar_t` 타입은 **wide-character** 혹은 **multibyte character** 타입이다.  
-- `L` 접두사를 붙여 wide-character 타입으로 명시할 수 있다.
-`wchar_t`는 기본적으로(by default) native 타입이다.
-- 이것은 [`/Zc` 컴파일러 옵션][2]에서 [`/Zc:wchar_t`][3]인 상태이다.
-- 뒤에 minus를 붙여서 `/Zc:wchar_t-`로 하면, `wchar_t`가 `unsigned short`의 typedef가 된다.  
-하지만 이렇게 하면 `wchar_t`가 빌트인 타입이 아니게 되므로 권장되지 않는다.
-- `__wchar_t` 타입은 `wchar_t`의 동의어(synonym)이다.
+wchar_t는 wide-character 타입을 의미한다.   
+마이크로소프트의 `wchar_t`는 2바이트 unsigned 값을 표현한다.
+- default로 built-in 타입 (혹은 네이티브 타입)이다.  
+Microsoft-specific 네이티브 타입인 `__wchar_t`와 동의어다.
+- 컴파일러 옵션을 [`/Zc:wchar_t-`][4]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
+이 경우, `wchar_t`가 built-in 타입이 아니므로 권장되지 않는다.
+- 리터럴에 `L` 접두사를 붙여 wide-character 타입으로 명시할 수 있다.
 #### char8_t
 UTF-8 문자 표현을 위해 사용된다.
 - C++20부터 생겼기 때문에 [`/std:c++20`][4]이나 `/std:c++latest` 같은 그 이후의 컴파일러 옵션을 사용해야 한다.
@@ -105,13 +106,8 @@ b++; // 에러
 
 [1]: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170
 [2]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
-
-
-
-[1]: https://docs.microsoft.com/en-us/cpp/build/reference/j-default-char-type-is-unsigned?view=msvc-170
-[2]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-conformance?view=msvc-170
-[3]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-wchar-t-wchar-t-is-native-type?view=msvc-170
-[4]: https://docs.microsoft.com/en-us/cpp/build/reference/std-specify-language-standard-version?view=msvc-170
+[3]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#j
+[4]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
 
 
 
