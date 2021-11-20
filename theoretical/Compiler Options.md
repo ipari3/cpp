@@ -4,8 +4,9 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 - 링커: 실행가능한(executalbe) 파일 **.exe**나 동적 링크 라이브러리(dynamic-link libraries) **.dll**을 생성.
 
 ## 컴파일러 옵션
-모든 컴파일러 옵션은 대소문자를 구분한다.  
-[카테고리 별 목록][1], [알파벳순 목록][2]
+모든 컴파일러 옵션은 대소문자를 구분한다.
+- [카테고리 별 목록][1]
+- [알파벳순 목록][2]
 
 #### /clr
 **Common Language Runtime Option**
