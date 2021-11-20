@@ -19,7 +19,8 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 - `char` 타입을 `signed char`에서 `unsigned char`로 바꾼다.
 - `int`로 확장될 때 [영의 확장][3]이 적용된다.
 - `char`에 `signed`가 명시적으로 선언된 경우, /J 옵션의 영향을 받지 않는다.  
-이 경우 `int`로 확장될 때 [부호 확장][4]이 적용된다.  
+이 경우 `int`로 확장될 때 [부호 확장][4]이 적용된다.
+
 ([더 자세한 설명 외부 링크][5])
 
 [1]: https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-by-category?view=msvc-170
