@@ -18,12 +18,40 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 #### /J
 **Default char Type Is unsigned**
 - `char` 타입을 `signed char`에서 `unsigned char`로 바꾼다.
-- `int`로 확장될 때 [영의 확장][3]이 적용된다.
+- `int`로 확장될 때 [영의 확장][5]이 적용된다.
 - `char`에 `signed`가 명시적으로 선언된 경우, /J 옵션의 영향을 받지 않는다.  
-이 경우 `int`로 확장될 때 [부호 확장][4]이 적용된다.
+이 경우 `int`로 확장될 때 [부호 확장][6]이 적용된다.
 
-([더 자세한 설명 외부 링크][5])
+([더 자세한 설명 외부 링크][7])
 
+#### /Zc
+**Conformance(부합)**
+- 컴파일러가 standard-confirming(표준에 부합) 혹은 Microsoft-specific(MS 특유)하게 행동하도록 한다.
+- /Zc:option{,option ...}처럼 : 뒤에 옵션을 명시한다.
+- Visual Studio에서 표준과 호환되지 않는 extension을 사용하는 경우, /Zc 옵션으로 표준에 부합하게 만들 수 있다.
+- 어떤 옵션은 Microsoft-specific하여 breaking change를 최소화한다.  
+어떤 옵션은 standard-confirming하여 보안, 성능, 호환성을 향상시키고, 이는 breaking change 비용보다 이득이 크다.
+> breaking change: 한 부분의 변경이 잠재적으로 다른 컴포넌트의 실패를 야기하는 변경을 말한다.
+##### /permissive-
+**Standards conformance**
+- 컴파일러에 standard conformance 모드를 명시한다.
+- permissive(관대한) 뒤에 minus를 붙인 것으로, 관대한 행동을 억제(disable)하는 것이다.
+
+([더 자세한 설명 외부 링크][8])
+##### /Zc:wchar_t
+**wchar_t Is Native Type**
+- `wchar_t`를 built-in 타입으로 분석하며(parse), C++ 표준에 따라 2바이트 unsigned 값을 표현한다.
+- C++ 컴파일의 default 옵션이며, C 컴파일에서는 무시된다.
+- /permissive- 옵션에는 영향을 받지 않는다.
+###### /Zc:wchar_t-
+- 뒤에 minus를 붙인 옵션을 명시하면 `wchar_t`는 built-in 타입이 아니고, `unsigned short`에 대한 `typedef`로 정의된다. (stddef.h)  
+이것은 C++ 표준이 아니기 때문에 권장되지 않으며, typedef 버전은 이식성(portability) 문제가 발생할 수 있다.
+
+([더 자세한 설명 외부 링크][9])  
+([/Zc 옵션 목록][10])
+
+
+<!-- 외부 링크들 -->
 [1]: https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-by-category?view=msvc-170
 [2]: https://docs.microsoft.com/en-us/cpp/build/reference/compiler-options-listed-alphabetically?view=msvc-170
 
@@ -34,3 +62,7 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 [5]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#zero-extension
 [6]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
 [7]: https://docs.microsoft.com/en-us/cpp/build/reference/j-default-char-type-is-unsigned?view=msvc-170#remarks
+<!-- /Zc -->
+[8]: https://docs.microsoft.com/en-us/cpp/build/reference/permissive-standards-conformance?view=msvc-170
+[9]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-wchar-t-wchar-t-is-native-type?view=msvc-170
+[10]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-conformance?view=msvc-170#remarks
