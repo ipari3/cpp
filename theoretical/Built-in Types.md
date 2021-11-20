@@ -14,11 +14,17 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 > C++에서는 `int`와 `long`이 4바이트로 같으며, 위의 크기 비교에 부합한다.  
 > 또한 `double`과 `long double`도 8바이트로 같다.
 #### 동의어
-기본적으로 언더스코어 두 개로 시작하는 타입은 다른 타입의 동의어다.
+언더스코어 두 개로 시작하고 크기가 명시된 타입은 다른 타입의 동의어다.
 - `__int8`과 &nbsp; `char`
 - `__int16`과 `short`
 - `__int32`와 `int`
 - `__int64`와 `long long`
+
+다른 타입들과의 동의 관계
+- `long`: `long`과 `__int32`는 동의어가 아니가 아니다. (`int`와 `long`이 동의어가 아니기 때문)
+- ANSI 타입: `__int8`, `__int16`, `__int32`는 같은 크기의 ANSI 타입들과 동의어기 때문에 포터블 코드에 사용하기 좋다.
+- 언더스코어 하나: 이전 버전의 `_int8`, `_int16`, `_int32`, `_int64`는 각각 동의어이다.
+  - [/Za 컴파일 옵션][2]이 명시된 경우는 동의어가 아니다.
 
 ## 정수(integer) 타입
 `int`가 기본 정수 타입이며 modifier 키워드를 추가로 명시할 수 있다.
@@ -42,7 +48,7 @@ C++에서 `long`의 표현 및 크기는 `int`와 동일하지만, 컴파일러�
 C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 사용한다.  
 3개의 built-in 타입이 있다: `float`, `double`, `long double`  
 `double`과 `long double`의 표현은 동일하지만, 컴파일러에게는 별개의 타입으로 취급된다.  
-([부동소수점 표현 외부 링크][2])
+([부동소수점 표현 외부 링크][3])
 
 ## 문자(character) 타입
 built-in 타입으로 `char`, `wchar_t`, `char8_t`, `char16_t`, `char32_t`가 있다.  
@@ -54,7 +60,7 @@ built-in 타입으로 `char`, `wchar_t`, `char8_t`, `char16_t`, `char32_t`가 �
 - ASCII 코드나 multi-byte 문자(Shift-JIS나 UTF-8 인코딩된 유니코드)의 개별 바이트를 담을 수 있다.
 - `signed char`이나 `unsigned char`와는 별개의 타입이다.
   - `char` 타입은 기본적으로 `signed char` 처럼 `int`로 진급된다(promoted).
-  - [/J 컴파일 옵션][3]이면, `unsigned char` 처럼 [부호 확장][4]이 없는 `int`로 진급된다.  
+  - [/J 컴파일 옵션][4]이면, `unsigned char` 처럼 [부호 확장][5]이 없는 `int`로 진급된다.  
   `unsigned char`은 built-in 타입이 아니며, 바이트를 표현하는데 종종 사용된다.
 #### wchar_t
 - wchar_t는 wide-character 타입을 의미한다.
@@ -62,7 +68,7 @@ built-in 타입으로 `char`, `wchar_t`, `char8_t`, `char16_t`, `char32_t`가 �
 - UTF-16LE로 인코딩된 유니코드를 담을 수 있다. (이것은 윈도우 OS의 네이티브 문자 타입이다.)
 - default로는 built-in 타입(혹은 네이티브 타입)이다.  
   - 이 경우, `__wchar_t`와 동의어다. (`__wchar_t`는 Microsoft-specific 네이티브 타입이다.)
-  - 컴파일러 옵션을 [`/Zc:wchar_t-`][5]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
+  - 컴파일러 옵션을 [`/Zc:wchar_t-`][6]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
   이 경우, `wchar_t`가 built-in 타입이 아니므로 권장되지 않는다.
 - 리터럴에 `L` 접두사를 붙여 wide-character 타입으로 명시할 수 있다.
 #### char8_t, char16_t, char32_t
@@ -88,6 +94,7 @@ C++17부터 postfix/prefix increment/decrement가 허용되지 않는다.
 bool b = false;
 b++; // 에러
 ```
+
 #### void
 `void` 타입은 공집합(empty set)을 나타낸다.  
 - **void 함수**: 값을 반환하지 않는다.
@@ -103,24 +110,21 @@ b++; // 에러
 
 어떤 표현(expression)이라도 보이드 타입으로 명시적으로 변환되거나 캐스트될 수 있다.  
 하지만 이러한 표현은 다음의 사용으로 제한된다.
-- [표현문][1](expression statement)
-- [컴마 연산자][2]의 왼쪽 피연산자
-- [삼항 조건 연산자][3](conditional operator) `? :`의 두세번째 피연산자
+- [표현문][7](expression statement)
+- [컴마 연산자][8]의 왼쪽 피연산자
+- [삼항 조건 연산자][9](conditional operator) `? :`의 두세번째 피연산자
 > 표현(expression)은 연산자와 피연산자 시퀀스다.  
 > 구문(statement)는 if문 같은 프로그램 요소이다.  
 > 표현문은 표현이 평가되는 구문이다.
 
 
 [1]: https://docs.microsoft.com/en-us/cpp/cpp/data-type-ranges?view=msvc-170
-[2]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
-[3]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#j
-[4]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
-[5]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
+[2]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#za
+[3]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
+[4]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#j
+[5]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
+[6]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
 
-
-
-
-[1]: 표현문
-[2]: 컴마 연산자
-[3]: 삼항 조건 연산자
-
+[7]: 표현문
+[8]: 컴마 연산자
+[9]: 삼항 조건 연산자
