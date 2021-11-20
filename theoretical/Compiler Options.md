@@ -43,7 +43,8 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 - `wchar_t`를 built-in 타입으로 분석하며(parse), C++ 표준에 따라 2바이트 unsigned 값을 표현한다.
 - C++ 컴파일의 default 옵션이며, C 컴파일에서는 무시된다.
 - /permissive- 옵션에는 영향을 받지 않는다.
-###### /Zc:wchar_t-
+
+**/Zc:wchar_t-**
 - 뒤에 minus를 붙인 옵션을 명시하면 `wchar_t`는 built-in 타입이 아니고, `unsigned short`에 대한 `typedef`로 정의된다. (stddef.h)  
 이것은 C++ 표준이 아니기 때문에 권장되지 않으며, typedef 버전은 이식성(portability) 문제가 발생할 수 있다.
 
