@@ -28,7 +28,7 @@ auto m0 = 'abcd'; // int, value 0x61626364
 char c1 = 'abcd'; // char, value 'd' (truncated. C4305, C4309)
 wchar_t w0 = 'abcd'; // wchar_t, value '\x6364' (truncated. C4305, C4309)
 ```
-- concat: 빅 엔디언 느낌의 16진수 값으로 표현할 수 있다.
+- concat: 리터럴은 빅 엔디언 느낌의 16진수 값이 다.
 - truncation: 타입 크기를 초과하면 앞 부분이 잘린다.
 
 ## 이스케이프 시퀀스
