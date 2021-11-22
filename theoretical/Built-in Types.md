@@ -54,26 +54,27 @@ C++ 컴파일러는 4바이트와 8바이트 IEEE-754 부동소수점 표현을 
 built-in 타입으로 `char`, `wchar_t`, `char8_t`, `char16_t`, `char32_t`가 있다.  
 #### char
 - 1바이트(8비트)
-- ASCII 코드나 multi-byte 문자(Shift-JIS나 UTF-8 인코딩된 유니코드)의 개별 바이트를 담을 수 있다.
+- ASCII 코드나 multi-byte 문자의 개별 바이트를 담을 수 있다.
+  - multi-byte 문자로는 Shift-JIS나 UTF-8 인코딩된 유니코드가 있다.
 - `signed char`이나 `unsigned char`와는 별개의 타입이다.
   - `char` 타입은 기본적으로 `signed char` 처럼 `int`로 진급된다(promoted).
   - [/J 컴파일 옵션][4]이면, `unsigned char` 처럼 [부호 확장][5]이 없는 `int`로 진급된다.  
   `unsigned char`은 built-in 타입이 아니며, 바이트를 표현하는데 종종 사용된다.
 #### wchar_t
-- wchar_t는 wide-character 타입을 의미한다.
 - 2바이트(16비트)이며, unsigned 표현에 사용한다.
-- UTF-16LE로 인코딩된 유니코드를 담을 수 있다. (이것은 윈도우 OS의 네이티브 문자 타입이다.)
+- [UTF-16LE][6]로 인코딩된 유니코드를 담을 수 있으며, 이것은 윈도우 OS의 네이티브 문자 타입이다.
 - default로는 built-in 타입(혹은 네이티브 타입)이다.  
   - 이 경우, `__wchar_t`와 동의어다. (`__wchar_t`는 Microsoft-specific 네이티브 타입이다.)
-  - 컴파일러 옵션을 [`/Zc:wchar_t-`][6]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
+  - 컴파일러 옵션을 [`/Zc:wchar_t-`][7]로 하면, `wchar_t`는 `unsigned short`의 typedef가 된다.  
   이 경우, `wchar_t`가 built-in 타입이 아니므로 권장되지 않는다.
+- wchar_t라는 이름은 wide-character 타입을 나타낸다.
 - 리터럴에 `L` 접두사를 붙여 wide-character 타입으로 명시할 수 있다.
 #### char8_t, char16_t, char32_t
-- char8_t: UTF-8 문자 표현. UTF-8로 인코딩된 유니코드를 저장할 수 있다.
+- char8_t: UTF-8 문자 표현.
   - `unsigned char`과 표현은 같지만 별개의 타입이다.
   - C++20부터 생겼기 때문에 `/std:c++20`이나 `/std:c++latest` 같은 그 이후의 컴파일러 옵션을 사용해야 한다.
-- char16_t: UTF-16 문자 표현. 모든 UTF-16 코드 유닛 표현 가능.
-- char32_t: UTF-32 문자 표현. 모든 UTF-32 코드 유닛 표현 가능.
+- char16_t: UTF-16 문자 표현.
+- char32_t: UTF-32 문자 표현.
 #### 문자열
 문자열은 built-in 혹은 native 타입이 아니고 specific 타입이다.  
 - narrow string: `char`, `char8_t` 타입의 문자열.
@@ -126,8 +127,9 @@ b++; // 에러
 [3]: https://docs.microsoft.com/en-us/cpp/build/ieee-floating-point-representation?view=msvc-170
 [4]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#j
 [5]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
-[6]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
+[6]: https://github.com/ipari3/cpp/blob/main/theoretical/Character%20Encoding.md#utf-16
+[7]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcwchar_t
 
-[7]: 표현문
-[8]: 컴마 연산자
-[9]: 삼항 조건 연산자
+[]: 표현문
+[]: 컴마 연산자
+[]: 삼항 조건 연산자
