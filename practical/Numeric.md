@@ -4,7 +4,7 @@
 - integer: `short`(2), `int`(4), `long`(4), `long long`(8)
 - floating-point: `float`(4), `double`(8), `long double`(8)
 ## integral
-integral은 '적분'이라는 뜻도 있지만, '정수'나 `전체`라는 뜻도 있다.  
+integral은 '적분'이라는 뜻도 있지만, '정수'나 '전체'라는 뜻도 있다.  
 여기서는 정수형 전체라는 느낌으로 사용되며, integer 타입은 integral 타입에 속한다.
 - integral: `short`, `int`, `long`, `long long`, `bool`, `char`, `wchar_t`, `__wchar_t`
 - integer:  `short`, `int`, `long`, `long long`  
