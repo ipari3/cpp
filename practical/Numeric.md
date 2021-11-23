@@ -38,7 +38,7 @@ int a = 0b0011010;
 int b = 0123;
 int c = 0x3fff;
 
-int d = 0987; // 에러. (7보다 큰 수)
+int d = 0987;   // 에러. (7보다 큰 수)
 int e = 0x3fgh; // 에러. (F 보다 큰 수)
 ```
 - 2, 8, 16진수 리터럴은 각각 `0b`, `0`, `0x`로 시작. (대소문자 상관없음)
@@ -49,18 +49,19 @@ int e = 0x3fgh; // 에러. (F 보다 큰 수)
 decimal point를 포함하거나, 지수 표기법을 사용하면 부동소수점 리터럴이다.
 ```
 18.46 // double 타입 (defualt)
+18.46f // float 타입
+18.46l // long double 타입
+
 38.
+
 18.46e0 // 18.46
 18.46E1 // 184.6
 18E0
-
-18.46f // float 타입
-18.46l // long double 타입
 ```
-- decimal point으로 끝나도 된다.
-- 지수로 표기하면 decimal point가 없어도 된다.
 - 타입이나 지수 접미사는 대소문자를 가리지 않는다.  
 `long double`과 `long`은 같은 접미사 `l`로 표기하는데, 실제 값으로 구분이 가능하다.
+- decimal point으로 끝나도 된다.
+- 지수로 표기하면 decimal point가 없어도 된다.
 
 ## 제한값
 integer와 floating-point 타입의 제한값들이 상수로 정의되어 있다.
