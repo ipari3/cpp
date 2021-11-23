@@ -10,7 +10,8 @@ built-in 타입은 컴파일러에 들어가 있는(built into) 타입으로, �
 
 ([데이터 타입의 범위 외부 링크][1])
 
-타입의 크기는 구현 방식에 따라 다르며, 보통 다음의 대소 관계가 성립한다.
+타입의 크기는 구현 방식에 따라 다르며, 보통 다음의 대소 관계가 성립한다.  
+서술적으로는 'at least'로 최소 크기를 정해 놓는다.
 - integer: 1바이트 = `char` <= `short` <= `int` <= `long` <= `long long`
 - floating-point: `float` <= `double` <= `long double`
 C++에서는 위의 대소 관계에 부합하면서 다음의 특징을 갖는다.
