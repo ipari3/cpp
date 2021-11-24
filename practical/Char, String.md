@@ -30,8 +30,8 @@ auto c3 = u'A';  // char16_t
 auto c4 = U'A';  // char32_t
 ```
 |타입|접두사|인코딩|
-|---|---|---|
-|`char`| 없음 |UTF-8|
+|---|-:-|---|
+|`char`| - |UTF-8|
 |`wchar_t`|`L`|UTF-16|
 |`char8_t`|`u8`|UTF-8|
 |`char16_t`|`u`|UTF-16|
