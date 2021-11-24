@@ -25,13 +25,13 @@
 ## 문자(character) 리터럴
 작은 따옴표로 감싼다.
 
-|접두사|타입|인코딩|
-|---|---|---|
-|-|`char`|ASCII-like|
-|`u8`|`char8_t`|UTF-8|
-|`L`|`wchar_t`|UTF-16|
-|`u`|`char16_t`|UTF-16|
-|`U`|`char32_t`|UTF-32|
+|타입|접두사|인코딩|
+|---|:-:|---|
+|`char`|-|ASCII-like|
+|`char8_t`|`u8`|UTF-8|
+|`wchar_t|`L``|UTF-16|
+|`char16_t`|`u`|UTF-16|
+|`char32_t`|`U`|UTF-32|
 
 |접두사|타입|인코딩|
 |--:|---|---|
