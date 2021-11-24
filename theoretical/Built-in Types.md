@@ -84,15 +84,12 @@ built-in 타입으로 `char`, `wchar_t`, `char8_t`, `char16_t`, `char32_t`가 �
 #### char8_t, char16_t, char32_t
 크기 명시형 문자 타입들은 고정 길이이며, unsigned다.
 |타입|인코딩|유의어|
-|---|---|--:|
+|---|---|---|
 |`char8_t`|UTF-8|`unsigned char`과 표현은 같지만 별개의 타입이다.|
 |`char16_t`|UTF-16|`std::uint_least16_t`와 표현은 같지만 별개의 타입이다.|
 |`char32_t`|UTF-32|`std::uint_least32_t`와 표현은 같지만 별개의 타입이다.|
-
-- char16_t: UTF-16 문자 표현. `std::uint_least16_t`와 표현은 같지만 별개의 타입이다.
-- char32_t: UTF-32 문자 표현. `std::uint_least32_t`와 표현은 같지만 별개의 타입이다.
-- 표현은 크기, 부호, 정렬 특징을 말한다.)
-> `char8_t` 타입은 C++20부터 생겼기 때문에 `/std:c++20`이나 `/std:c++latest` 같은 그 이후의 컴파일러 옵션을 사용해야 한다.
+- 표현은 크기, 부호, 정렬 특징을 말한다.
+- `char8_t` 타입은 C++20부터 생겼기 때문에 `/std:c++20`이나 `/std:c++latest` 같은 그 이후의 컴파일러 옵션을 사용해야 한다.
 #### basic_string
 문자열 타입은 built-in 타입은 아니다.  
 C++ 표준 라이브러리의 `basic_string` 템플릿은 다음의 문자열 타입을 갖고 있다.
