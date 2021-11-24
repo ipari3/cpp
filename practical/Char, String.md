@@ -5,19 +5,19 @@
 -  size-spcific 타입들은 비트 단위로 명시되어 있다.
 ## 문자열 타입
 문자열 타입은 built-in 타입이 아니다.  
-배열 문자열 타입에는 `const char*`, `const wchar_t*`, `const char8_t*` 등이 있다.  
+**배열 문자열** 타입에는 `const char*`, `const wchar_t*`, `const char8_t*` 등이 있다.  
 - 타입의 형식은 원소의 타입에 `const`와 포인터 연산자 `*`가 붙은 것이다.
 - null-terminated 배열이다.
 
-표준 라이브러리 문자열 타입에는 `std::string`, `std::wstring`, `std::u8string` 등이 있다.
+**표준 라이브러리 문자열** 타입에는 `std::string`, `std::wstring`, `std::u8string` 등이 있다.
 - 타입의 형식은 원소의 타입에서 `char`이 `string`으로 바뀐 것이다.
 
 # 리터럴
 문자 리터럴은 작은따옴표(')로 감싸고, 문자열 리터럴은 큰따옴표(")로 감싼다.  
 문자 및 문자열 리터럴은 뉴메릭 리터럴과 다른 점이 많다.
-- case-sensitive: 대소문자를 구분.
-- prefix: 접두사로 타입 명시. (접미사 `s`는 예외) 
-- truncation: 타입의 크기를 넘는 리터럴은 에러를 발생시키지 않고, 앞 부분이 잘린다.  
+- **case-sensitive**: 대소문자를 구분.
+- **prefix**: 접두사로 타입 명시. (접미사 `s`는 예외) 
+- **truncation**: 타입의 크기를 넘는 리터럴은 에러를 발생시키지 않고, 앞(high order) 부분이 잘린다.  
 (접미사가 `L` 혹은 타입이 `wchar_t`인 경우는 반대)
 
 ## 문자(character) 리터럴
@@ -29,19 +29,13 @@ auto c2 = L'A';  // wchar_t
 auto c3 = u'A';  // char16_t
 auto c4 = U'A';  // char32_t
 ```
-|타입|접두사|인코딩|
+|타입|접두사'A'|인코딩|
 |---|:-:|---|
-|`char`| - |UTF-8|
-|`wchar_t`|`L`|UTF-16|
-|`char8_t`|`u8`|UTF-8|
-|`char16_t`|`u`|UTF-16|
-|`char32_t`|`U`|UTF-32|
-
-- char 타입: 기본형
-- wchar_t 타입:  접두사 L (UTF-16)
-- char8_t  타입: 접두사 u8 (UTF-8)
-- char16_t 타입: 접두사 u (UTF-16)
-- char32_t 타입: 접두사 U (UTF-32)
+|`char`| `'A'` |ASCII-like|
+|`wchar_t`|`L'A'`|UTF-16|
+|`char8_t`|`u8'A'`|UTF-8|
+|`char16_t`|`u'A'`|UTF-16|
+|`char32_t`|`U'A'`|UTF-32|
 
 #### 다중문자(multicharacter) 리터럴
 작은 따옴표 안에 여러 문자가 들어갈 수 있다.  
