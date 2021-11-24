@@ -37,6 +37,10 @@ auto c4 = U'A';  // char32_t
 |`char16_t`|`u`|UTF-16|
 |`char32_t`|`U`|UTF-32|
 
+|타입|`char`|`char`|`char`|
+|접두사|-|`L`|`u8`|
+|인코딩|UTF-8|UTF-8|UTF-8
+
 - char 타입: 기본형
 - wchar_t 타입:  접두사 L (UTF-16)
 - char8_t  타입: 접두사 u8 (UTF-8)
