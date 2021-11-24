@@ -67,8 +67,8 @@ char c2 = '\009';  // '9'
 char c3 = '\089';  // '9' (truncated. C4305, C4309)
 char c4 = '\qrs';  // 's' (truncated. C4129, C4305, C4309)
 ```
-- **'\oooㅁ'**:  ㅇㄹ
-- **'\ooo'**의 형태: 최대 3-digit을 담으며, 앞에서 자릿수를 채우는 0은 생략 가능.
+- __a__, <u>u</u>  ㅇㄹ
+- <b>'\ooo'</b>의 형태: 최대 3-digit을 담으며, 앞에서 자릿수를 채우는 0은 생략 가능.
 - truncation due to **length**: 숫자가 3개를 넘으면 뒤의 3개만 가지고 나머지 앞의 숫자들은 잘린다. (경고)
 - truncation due to **value**: 각 숫자가 0 ~ 7이 아닌 값을 가지면 맨 뒤의 문자만 가지며 앞의 숫자들은 잘린다. (경고)
 - **limit**: 리터럴이 `\377` 보다 크면 안된다. (에러 C2022: 'value-in-decimal': too big for character)  
