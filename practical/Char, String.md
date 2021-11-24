@@ -22,20 +22,16 @@
 
 ## 문자(character) 리터럴
 작은 따옴표로 감싼다.
-```
-auto c0 = 'A';   // char
-auto c1 = u8'A'; // char8_t (before C++20: char)
-auto c2 = L'A';  // wchar_t
-auto c3 = u'A';  // char16_t
-auto c4 = U'A';  // char32_t
-```
-|타입|접두사'A'|인코딩|
+
+|타입|접두사|인코딩|
 |---|:-:|---|
 |`char`| `'A'` |ASCII-like|
-|`wchar_t`|`L'A'`|UTF-16|
 |`char8_t`|`u8'A'`|UTF-8|
+|`wchar_t`|`L'A'`|UTF-16|
 |`char16_t`|`u'A'`|UTF-16|
 |`char32_t`|`U'A'`|UTF-32|
+- 접두사 항목은 'A'에 붙은 형태를 명시한 것.
+- C++20 이전에는 접두사가 `u8`인 리터럴의 타입은 `char`이었다. (`char8_t`는 C++20부터 도입)
 
 #### 다중문자(multicharacter) 리터럴
 작은 따옴표 안에 여러 문자가 들어갈 수 있다.  
