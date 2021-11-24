@@ -39,7 +39,7 @@ auto c4 = U'A';  // char32_t
 
 |타입|`char`|`char`|`char`|
 |접두사|-|`L`|`u8`|
-|인코딩|UTF-8|UTF-8|UTF-8
+|인코딩|UTF-8|UTF-8|UTF-8|
 
 - char 타입: 기본형
 - wchar_t 타입:  접두사 L (UTF-16)
