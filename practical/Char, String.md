@@ -26,6 +26,14 @@
 작은 따옴표로 감싼다.
 
 |접두사|타입|인코딩|
+|---|---|---|
+|-|`char`|ASCII-like|
+|`u8`|`char8_t`|UTF-8|
+|`L`|`wchar_t`|UTF-16|
+|`u`|`char16_t`|UTF-16|
+|`U`|`char32_t`|UTF-32|
+
+|접두사|타입|인코딩|
 |--:|---|---|
 |`'A'`|`char`|ASCII-like|
 |`u8'A'`|`char8_t`|UTF-8|
