@@ -29,6 +29,9 @@ auto c2 = L'A';  // wchar_t
 auto c3 = u'A';  // char16_t
 auto c4 = U'A';  // char32_t
 ```
+|타입|접두사|인코딩|
+|`char`|1|2|
+
 - char 타입: 기본형
 - wchar_t 타입:  접두사 L (UTF-16)
 - char8_t  타입: 접두사 u8 (UTF-8)
