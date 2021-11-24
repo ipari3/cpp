@@ -29,18 +29,9 @@
 |---|:-:|---|
 |`char`|-|ASCII-like|
 |`char8_t`|`u8`|UTF-8|
-|`wchar_t|`L``|UTF-16|
+|`wchar_t`|`L`|UTF-16|
 |`char16_t`|`u`|UTF-16|
 |`char32_t`|`U`|UTF-32|
-
-|접두사|타입|인코딩|
-|--:|---|---|
-|`'A'`|`char`|ASCII-like|
-|`u8'A'`|`char8_t`|UTF-8|
-|`L'A'`|`wchar_t`|UTF-16|
-|`u'A'`|`char16_t`|UTF-16|
-|`U'A'`|`char32_t`|UTF-32|
-- 접두사 항목은 'A'에 붙은 형태를 표기한 것.
 - C++20 이전에는 접두사가 `u8`인 리터럴의 타입은 `char`이었다. (`char8_t`는 C++20부터 도입)
 
 #### 다중문자(multicharacter) 리터럴
@@ -134,15 +125,15 @@ wchar_t w7 = L'\x0pqr'; // L'\0' (truncated. C4066)
 ## 문자열(string) 리터럴
 큰따옴표로 감싼다.
 
-|접두사|타입|인코딩|
-|--:|---|---|
-|`"hello"`|`const char*`|ASCII-like|
-|`u8"hello"`|`const char8_t*`|UTF-8|
-|`L"hello"`|`const wchar_t*`|UTF-16|
-|`u"hello"`|`const char16_t*`|UTF-16|
-|`U"hello"`|`const char32_t*`|UTF-32|
-- 기본 문자열은 `const char[n]` 계열 타입의 null-terminated 배열이다.<br>
-원소의 값으로 큰 따옴표("), 백슬래시(\\), newline 문자를 제외한 모든 문자를 포함할 수 있다.<br>
+|타입|접두사|인코딩|
+|---|:-:|---|
+|`const char*`|-|ASCII-like|
+|`const char8_t*`|`u8`|UTF-8|
+|`const wchar_t*`|`L`|UTF-16|
+|`const char16_t*`|`u`|UTF-16|
+|`const char32_t*`|`U`|UTF-32|
+- 기본 문자열은 `const char[n]` 계열 타입의 null-terminated 배열이다.
+- 원소의 값으로 *큰 따옴표("), 백슬래시(\\), newline를 <ins>제외한</ins>* 모든 문자를 포함할 수 있다.<br>
 1바이트 크기의 이스케이프 시퀀스나 UCN도 포함할 수 있다.
 - C++20 이전에는 접두사가 `u8`인 리터럴의 타입은 `const char*`이었다. (`char8_t`는 C++20부터 도입)
 
