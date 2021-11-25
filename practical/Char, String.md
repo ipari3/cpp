@@ -132,7 +132,8 @@ wchar_t w7 = L'\x0pqr'; // L'\0' (truncated. C4066)
 |`const wchar_t*`|`L`|UTF-16|
 |`const char16_t*`|`u`|UTF-16|
 |`const char32_t*`|`U`|UTF-32|
-- 기본 문자열은 `const char[n]` 계열 타입의 null-terminated 배열이다.
+- 기본 문자열은 `const char[n]` 계열 타입의 null-terminated [배열][5]이다.<br>
+[`const`][6]이기 때문에 변경가능하지 않다(not modifiable).
 - 원소의 값으로 *큰 따옴표("), 백슬래시(\\), newline를 <ins>제외한</ins>* 모든 문자를 포함할 수 있다.<br>
 1바이트 크기의 이스케이프 시퀀스나 UCN도 포함할 수 있다.
 - C++20 이전에는 접두사가 `u8`인 리터럴의 타입은 `const char*`이었다. (`char8_t`는 C++20부터 도입)
@@ -176,7 +177,7 @@ const char* s2 = R"abc()")abc"; // 여는 괄호가 "abc(이기 때문에 )"는 
 이 때, 추가적인 construction이나 conversion 단계없이 `std::string` 리터럴을 생성한다.
 ```
 auto S0 = "hello"s;   // std::string
-auto S1 = u8"hello"s; // std::u8string (before C++20: std::string)
+auto S1 = u8"hello"s; // std::u8string
 auto S2 = L"hello"s;  // std::wstring
 auto S3 = u"hello"s;  // std::u16string
 auto S4 = U"hello"s;  // std::u32string
@@ -185,12 +186,44 @@ auto S5 = R"(Hello \ world)"s; // std::string from a raw const char*
 ```
 - **suffixed-s**: 다른 문자 관련 접사와 달리 접미사다.
 - **std의 타입**: std의 문자열 타입의 새로운 리터럴이며, string에 명시된 prefixed-타입이 붙는 형식이다.
-- **raw string과 결합**하여 사용할 수 있다. <ins>타입은 표준 라이브러리 문자열</ins>이다.
+- **raw string과 결합**하여 사용할 수 있다. 타입은 <ins>표준 라이브러리 문자열</ins>이다.
 
 ## 문자열 리터럴의 크기
+문자열 리터럴의 바이트 크기는 문자열의 길이(문자 개수)와 같지 않다.
+- null-terminating 배열의 경우 null을 저장할 1바이트가 추가된다.
+- UTF-8은 최대 4 코드 유닛, UTF-16은 최대 2 코드 유닛을 사용하여 둘 다 최대 4바이트를 사용한다.
+
+따라서 문자열의 길이 `strlen()`이나 `wcslen()`으로는 총 바이트 수를 알 수 없다.
+
+## 문자열 변경
+`std::string` 리터럴이 아닌 문자열 리터럴은 상수이며, 값을 변경할 수 없다.<br>
+또한 `const`가 아닌 포인터는 문자열 리터럴로 초기화할 수 없다. (타입 변환도 불가능)
+- `auto`로 선언하면 컴파일러가 알아서 리터럴에 맞는 `const`인 타입으로 선언해준다.
+- [/Zc:strictStrings- 컴파일 옵션][6]이 적용된 경우는 가능하다.<br>
+하지만 여전히 문자열 값 변경은 불가능하다.
+
+## 인접 문자열 concat
+인접한 narrow나 wide 문자열은 concat된다.<br>
+`std::string` 리터럴은 `+`연산자로 concat할 수 있다.<br>
+단, 리터럴들의 prefix 및 suffix가 일치해야 한다.
+```
+char str1[] = "1234";
+char str2[] = "12" "23"; // 위와 동일다.
+
+auto x1 = "hello" " " " world";      // OK
+auto x2 = U"hello" " " L"world";     // C2308: disagree on prefix
+auto x3 = u8"hello" " "s u8"world"z; // C3688, disagree on suffixes
+```
+
+## 문자열 풀링
+프로그램 실행 중 문자열들을 저장하여 여러 포인터가 가리킬 수 있도록 한다.
+- 문자열 풀링을 enable하려면 [/GF 컴파일 옵션][7]을 사용한다.
 
 
 [1]: https://github.com/ipari3/cpp/blob/main/theoretical/Built-in%20Types.md#built-in-%ED%83%80%EC%9E%85
 [2]: https://docs.microsoft.com/en-us/cpp/cpp/string-and-character-literals-cpp?view=msvc-170#bkmk_Escape
 [3]: https://docs.microsoft.com/en-us/cpp/c-language/escape-sequences?view=msvc-170
 [4]: https://docs.microsoft.com/en-us/cpp/cpp/character-sets?view=msvc-170#universal-character-names
+[5]: 배열
+[6]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#zcstrictstrings
+[7]: https://github.com/ipari3/cpp/blob/main/theoretical/Compiler%20Options.md#gf
