@@ -15,14 +15,40 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 
 ([더 자세한 설명 외부 링크][3], [제약 사항 외부 링크][4])
 
+## /GF
+**Eliminate Duplicate Strings**
+- 컴파일러가 execution 중에 프로그램 이미지와 메모리에 있는 동일한 문자열들의 하나의 복사본을 만들게 한다.<br>
+이로써 다수의 포인터가 다수의 각 버퍼를 가리키는 대신, 하나의 버퍼를 가리키게 한다.
+- 이것은 프로그램을 더 작게 만드는 최적화이며, 문자열 풀링(pooling)이라고 불린다.
+- 각 유니크 문자열을 위한 addressable 섹션을 만드는데, 최대 65,536개의 섹션을 만들 수 있다.<br>
+따라서 프로그램이 65,536개 이상의 문자열을 포함하면, /bigobj 컴파일 옵션을 사용해야 한다.
+
+> 65,536 = 2<sup>16</sup> = 16진수 ffff
+
+#### /bigobj
+**Increase Number of Sections in .Obj file**
+- 목적 파일이 가질 수 있는 섹션의 개수를 늘린다.<br>
+65,536<sup>2</sup> = 2<sup>32</sup> = 4,294,967,296개로 늘린다.
+- [Universal Windows Platform][5] 프로젝트에서 default로 enable되어 있다.<br>
+machine-generated XAML 코드가 매우 많은 헤더를 포함하기 때문이다.
+
+#### /O1, /O2
+**Minimize Size, Maximize Speed**
+- 미리 정의된 크기 및 속도 최적화 옵션셋이다. (숫자가 0이 아니라 알파벳 대문자 O다.)
+
+|옵션|설명|동등|
+|---|---|---|
+|/O1|크기 최소화|/Og /Os /Oy /Ob2 /GF /Gy|
+|/O2|속도 최대화|/Og /Oi /Ot /Oy /Ob2 /GF /Gy|
+
 ## /J
 **Default char Type Is unsigned**
 - `char` 타입을 `signed char`에서 `unsigned char`로 바꾼다.
-- `int`로 확장될 때 [영의 확장][5]이 적용된다.
+- `int`로 확장될 때 [영의 확장][6]이 적용된다.
 - `char`에 `signed`가 명시적으로 선언된 경우, /J 옵션의 영향을 받지 않는다.<br>
-이 경우 `int`로 확장될 때 [부호 확장][6]이 적용된다.
+이 경우 `int`로 확장될 때 [부호 확장][7]이 적용된다.
 
-([더 자세한 설명 외부 링크][7])
+([더 자세한 설명 외부 링크][8])
 
 ## /Za (deprecated)
 **Disable Language Extensions**  
@@ -43,7 +69,7 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 - 컴파일러에 standard conformance 모드를 명시한다.
 - permissive(관대한) 뒤에 minus를 붙인 것으로, 관대한 행동을 disable하는 것이다.
 
-([더 자세한 설명 외부 링크][8])
+([더 자세한 설명 외부 링크][9])
 
 #### /Zc:strictStrings
 **Disable string literal type conversion**
@@ -77,8 +103,8 @@ str[1] = L'a'; // 런타임 에러
 - 뒤에 minus를 붙인 옵션을 명시하면 `wchar_t`는 built-in 타입이 아니고, `unsigned short`에 대한 `typedef`로 정의된다. (stddef.h)<br>
 이것은 C++ 표준이 아니기 때문에 권장되지 않으며, typedef 버전은 이식성(portability) 문제가 발생할 수 있다.
 
-([더 자세한 설명 외부 링크][9])<br>
-([/Zc 옵션 목록][10])
+([더 자세한 설명 외부 링크][10])<br>
+([/Zc 옵션 목록][11])
 
 
 <!-- 외부 링크들 -->
@@ -88,11 +114,15 @@ str[1] = L'a'; // 런타임 에러
 <!-- /clr -->
 [3]: https://docs.microsoft.com/en-us/cpp/build/reference/clr-common-language-runtime-compilation?view=msvc-170
 [4]: https://docs.microsoft.com/en-us/cpp/build/reference/clr-restrictions?view=msvc-170
+
+<!-- /GF -->
+[5]: https://github.com/ipari3/cpp/blob/main/theoretical/C%20Language.md#api
+
 <!-- /J -->
-[5]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#zero-extension
-[6]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
-[7]: https://docs.microsoft.com/en-us/cpp/build/reference/j-default-char-type-is-unsigned?view=msvc-170#remarks
+[6]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#zero-extension
+[7]: https://github.com/ipari3/cpp/blob/main/theoretical/Numeric%20Manipulation.md#sign-extension
+[8]: https://docs.microsoft.com/en-us/cpp/build/reference/j-default-char-type-is-unsigned?view=msvc-170#remarks
 <!-- /Zc -->
-[8]: https://docs.microsoft.com/en-us/cpp/build/reference/permissive-standards-conformance?view=msvc-170
-[9]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-wchar-t-wchar-t-is-native-type?view=msvc-170
-[10]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-conformance?view=msvc-170#remarks
+[9]: https://docs.microsoft.com/en-us/cpp/build/reference/permissive-standards-conformance?view=msvc-170
+[10]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-wchar-t-wchar-t-is-native-type?view=msvc-170
+[11]: https://docs.microsoft.com/en-us/cpp/build/reference/zc-conformance?view=msvc-170#remarks
