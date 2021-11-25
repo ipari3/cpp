@@ -19,17 +19,16 @@ MSVC는 Microsoft Visual C++의 약자로, C, C++, C++/CX를 위한 컴파일러
 **Default char Type Is unsigned**
 - `char` 타입을 `signed char`에서 `unsigned char`로 바꾼다.
 - `int`로 확장될 때 [영의 확장][5]이 적용된다.
-- `char`에 `signed`가 명시적으로 선언된 경우, /J 옵션의 영향을 받지 않는다.  
+- `char`에 `signed`가 명시적으로 선언된 경우, /J 옵션의 영향을 받지 않는다.<br>
 이 경우 `int`로 확장될 때 [부호 확장][6]이 적용된다.
 
 ([더 자세한 설명 외부 링크][7])
 
-## /Za
+## /Za (deprecated)
 **Disable Language Extensions**  
 - ANSI C89/ISO C90과 호환되지 않는 C에 대한 MS extensions를 disable한다.
 #### /Ze
-- MS extensions를 enable한다.  
-dafulat로 enable이기 대문에 이 옵션은 deprecated되었다.
+- MS extensions를 enable하는데, 이것은 dafulat이기 때문에 이 옵션은 deprecated되었다.
 
 ## /Zc
 **Conformance(부합)**
@@ -45,6 +44,29 @@ dafulat로 enable이기 대문에 이 옵션은 deprecated되었다.
 - permissive(관대한) 뒤에 minus를 붙인 것으로, 관대한 행동을 disable하는 것이다.
 
 ([더 자세한 설명 외부 링크][8])
+
+#### /Zc:strictStrings
+**Disable string literal type conversion**
+- 문자열 리터럴로 초기화되는 포인터는 엄격한 `const` 자격을 갖춰야 한다.
+- `auto`로 문자열 포인터를 선언하면, 컴파일러가 리터럴 타입에 맞는 `const` 포인터 타입으로 선언한다.<br>
+즉, `auto`에는 `const`를 붙이지 않아도 된다.
+
+|코드|컴파일|
+|--:|:-:|
+|wchar_t* str = L"hello";|컴파일타임 에러|
+|const wchar_t* str = L"hello";|컴파일 성공|
+|auto str = L"hello";|컴파일 성공|
+
+**/Zc:strictStrings-**
+- 뒤에 minus를 붙인 옵션을 명시하면, 포인터가 엄격한 `const` 자격을 갖추지 않아도 된다.
+- 그렇다고 포인터가 가리키는 리터럴이 상수가 아닌 것은 아니다.<br>
+문자열을 변경하려고 하면 런타일 에러가 발생한다.
+
+```
+wchar_t* str = L"hello"; // /Zc:strictStrings-이면 컴파일 성공
+str[1] = L'a'; // 런타임 에러
+```
+
 #### /Zc:wchar_t
 **wchar_t Is Native Type**
 - `wchar_t`를 built-in 타입으로 분석하며(parse), C++ 표준에 따라 2바이트 unsigned 값을 표현한다.
@@ -52,10 +74,10 @@ dafulat로 enable이기 대문에 이 옵션은 deprecated되었다.
 - /permissive- 옵션에는 영향을 받지 않는다.
 
 **/Zc:wchar_t-**
-- 뒤에 minus를 붙인 옵션을 명시하면 `wchar_t`는 built-in 타입이 아니고, `unsigned short`에 대한 `typedef`로 정의된다. (stddef.h)  
+- 뒤에 minus를 붙인 옵션을 명시하면 `wchar_t`는 built-in 타입이 아니고, `unsigned short`에 대한 `typedef`로 정의된다. (stddef.h)<br>
 이것은 C++ 표준이 아니기 때문에 권장되지 않으며, typedef 버전은 이식성(portability) 문제가 발생할 수 있다.
 
-([더 자세한 설명 외부 링크][9])  
+([더 자세한 설명 외부 링크][9])<br>
 ([/Zc 옵션 목록][10])
 
 
