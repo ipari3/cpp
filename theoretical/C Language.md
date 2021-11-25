@@ -22,7 +22,7 @@ Windows 프로그램 개발 및 실행 환경. .NET은 크로스 플랫폼을 �
 ## API
 - [Windows API(**Win32 API**)][3]: C언어 기반 API.
 - [Windows Runtime(**WinRT**)][4]: C++ 기반 API. (since 윈도우8)
-- [Universal Windows Platform][5]: .NET 기반 API. (since 윈도우10)
+- [Universal Windows Platform(**UWP**)][5]: .NET 기반 API. (since 윈도우10)
 
 ## language specification
 - ISO C++ standard: 표준 C++ 규격.
